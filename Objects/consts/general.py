@@ -1,0 +1,18 @@
+NAME = "name"
+ID = "id"
+IS_PREMIUM = "is_premium"
+PLAYLISTS = "playlists"
+ALBUMS = "albums"
+SONGS = "songs"
+ARTISTS = "artists"
+PASSWORD = "password"
+POPULARITY = "popularity"
+GENRE = "genre"
+
+SONG_FILE_START = "song_"
+ALBUM_FILE_START = "album_"
+PLAYLIST_FILE_START = "playlist_"
+USER_FILE_START = "user_"
+
+PICKLE_FILE_TYPE = ".pkl"
+JSON_FILE_TYPE = ".json"
