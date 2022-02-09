@@ -16,11 +16,11 @@ class User:
         self.is_premium = is_premium
         self.playlists = playlists
 
-    def object_path(self):
+    def _object_path(self):
         return f'{consts.FILES_ROOT_PATH}\\{consts.SONGS}\\{consts.SONG_FILE_START}{self.id}{consts.JSON_FILE_TYPE}'
 
     def save(self):
-        manager.save(self, self.object_path())
+        manager.save(self, self._object_path())
 
     def add_playlist(self, p_name, p_id):
         if p_id in self.playlists.keys():
