@@ -19,6 +19,3 @@ def get_songs(songs_folder_path="C:\\Users\\User\\Desktop\\learn process\\2022-0
 
 def write_items(songs_path):
     songs = get_songs(songs_path)
-
-
-print(get_songs())
