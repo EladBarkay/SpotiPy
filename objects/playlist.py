@@ -1,5 +1,5 @@
 import typing
-from Song import Song
+from song import Song
 
 
 class Playlist:

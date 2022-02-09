@@ -1,6 +1,6 @@
 import typing
 
-from User import User
+from user import User
 
 
 class Artist(User):
