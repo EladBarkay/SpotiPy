@@ -1,6 +1,6 @@
 import typing
-import Song
-from Objects import Artist
+from Song import Song
+from Artist import Artist
 
 
 class Album:
@@ -8,4 +8,3 @@ class Album:
     name: str
     songs: typing.List[Song]
     artists: typing.List[Artist]
-    

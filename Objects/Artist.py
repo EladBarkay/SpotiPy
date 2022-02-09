@@ -1,4 +1,4 @@
-import User
+from User import User
 
 
 class Artist(User):

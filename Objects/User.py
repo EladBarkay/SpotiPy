@@ -1,5 +1,5 @@
 import typing
-import Playlist
+from Playlist import Playlist
 
 
 class User:
