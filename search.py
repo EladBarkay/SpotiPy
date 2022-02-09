@@ -34,10 +34,12 @@ class Searcher:
         for song in self.songs:
             if artist_id in [artist.id for artist in song.artists]:
                 artist_songs.append(song)
-        return sorted(artist_songs, key=operator.attrgetter(consts.general.POPULARITY), reverse=True)
+        return artist_songs
 
     def artist_top_songs(self, artist_id: str, countToShow=10):
         all_songs = self.all_artist_songs(artist_id)
+        all_songs.sort(key=operator.attrgetter(consts.general.POPULARITY), reverse=True)
+        # git commit -m "func for all songs of an artist, and a func for artist to"
         return all_songs[:countToShow]
 
 
