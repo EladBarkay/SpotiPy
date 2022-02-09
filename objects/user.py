@@ -1,18 +1,16 @@
+import typing
 import consts.general as consts
 import consts.custom_exceptions as ex
 from file_managment import save_and_load as manager
-import typing 
+from spotipy_generic_obj import SpotipyGenericObj
 
 
-class User:
-    id: str
-    name: str
+class User(SpotipyGenericObj):
     is_premium: bool
     playlists: typing.Dict[str, str]  # playlist name to playlist id
 
     def __init__(self, _id: str, name: str, is_premium: bool, playlists: typing.Dict[str, str]):
-        self.id = _id
-        self.name = name
+        super().__init__(_id, name)
         self.is_premium = is_premium
         self.playlists = playlists
 

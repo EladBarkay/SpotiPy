@@ -1,6 +1,7 @@
 import typing
 import json
 import consts.general as consts
+from objects.spotipy_generic_obj import SpotipyGenericObj
 
 
 def load(song_path):
@@ -9,22 +10,20 @@ def load(song_path):
     _id = decoded_file[consts.ID]
     name = decoded_file[consts.NAME]
     popularity = decoded_file[consts.POPULARITY]
-    album = decoded_file[consts.ALBUMS]
-    albums: list = [i[consts.ID] for i in dict(decoded_file[consts.ALBUMS]).values()]
+    album = SpotipyGenericObj(decoded_file[consts.ALBUM][consts.ID], decoded_file[consts.ALBUM][consts.NAME])
+    artists: typing.List[SpotipyGenericObj] = \
+        [SpotipyGenericObj(i[consts.ID], i[consts.NAME]) for i in decoded_file[consts.ARTISTS]]
+    return Song(_id, name, popularity, album, artists)
 
-    return
 
-
-class Song:
-    id: str
-    name: str
+class Song(SpotipyGenericObj):
     popularity: int
-    album: str  # list of album id's
-    artists: typing.List[str]  # list of artist id's
+    album: SpotipyGenericObj
+    artists: typing.List[SpotipyGenericObj]  # list of artist id's
 
-    def __init__(self, _id: str, name: str, popularity: int, album: str, artists: typing.List[str]):
-        self.id = _id
-        self.name = name
+    def __init__(self, _id: str, name: str, popularity: int, album: SpotipyGenericObj,
+                 artists: typing.List[SpotipyGenericObj]):
+        super().__init__(_id, name)
         self.popularity = popularity
         self.album = album
         self.artists = artists
