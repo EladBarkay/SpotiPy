@@ -1,10 +1,7 @@
 import objects.consts.general as consts
-import pickle
+import objects.consts.custom_exceptions as ex
+from objects.file_managment import save_and_load as manager
 import typing
-
-
-def load_user(id):
-    return {}
 
 
 class User:
@@ -19,4 +16,13 @@ class User:
         self.is_premium = is_premium
         self.playlists = playlists
 
+    def object_path(self):
+        return f'{consts.FILES_ROOT_PATH}\\{consts.SONGS}\\{consts.SONG_FILE_START}{self.id}{consts.JSON_FILE_TYPE}'
 
+    def save(self):
+        manager.save(self, self.object_path())
+
+    def add_playlist(self, p_name, p_id):
+        if p_id in self.playlists.keys():
+            raise ex.PlaylistNameAlreadyExistsError()
+        self.playlists[p_name] = p_id
