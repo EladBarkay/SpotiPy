@@ -18,6 +18,15 @@ class Searcher:
                     artists.append(artist)
         return artists
 
+    def artist_albums(self, artist_id: str):
+        albums: typing.List[SpotipyGenericObj] = []
+        for song in self.songs:
+            if artist_id in [artist.id for artist in song.artists]:
+                if song.album not in albums:
+                    albums.append(song.album)
+        return albums
+
 
 x = Searcher()
-print(x.all_artists())
+for i in x.artist_albums("3MZsBdqDrRTJihTHQrO6Dq"):
+    print(i.__dict__)
