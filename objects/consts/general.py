@@ -10,6 +10,8 @@ PASSWORD = "password"
 POPULARITY = "popularity"
 GENRE = "genre"
 
+FILES_ROOT_PATH = "Resources"
+
 SONG_FILE_START = "song_"
 ALBUM_FILE_START = "album_"
 PLAYLIST_FILE_START = "playlist_"
