@@ -1,3 +1,7 @@
+from objects import album, artist, playlist, song, user
+from objects.consts import general
+
+
 def main():
     pass
 

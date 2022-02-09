@@ -1,6 +1,7 @@
-import consts.general as consts
+import objects.consts.general as consts
 import pickle
 import typing
+
 
 def load_user(id):
     return {}

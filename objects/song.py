@@ -1,21 +1,32 @@
 import typing
-from album import Album
-from artist import Artist
+import json
+import objects.consts.general as consts
+
+
+def load(song_path):
+    file = open(song_path, 'r')
+    decoded_file = json.JSONDecoder().decode(file.read())[consts.TRACK]
+    _id = decoded_file[consts.ID]
+    name = decoded_file[consts.NAME]
+    popularity = decoded_file[consts.POPULARITY]
+    album = decoded_file[consts.ALBUMS]
+    albums: list = [i[consts.ID] for i in dict(decoded_file[consts.ALBUMS]).values()]
+
+    return
 
 
 class Song:
     id: str
     name: str
     popularity: int
-    # TODO: track: typing.Dict[TRACK_TYPE: str, Track]
-    albums: typing.List[str]  # list of album id's
+    album: str  # list of album id's
     artists: typing.List[str]  # list of artist id's
 
-    def __init__(self, _id: str, name: str, popularity: int, albums: typing.List[str], artists: typing.List[str]):
+    def __init__(self, _id: str, name: str, popularity: int, album: str, artists: typing.List[str]):
         self.id = _id
         self.name = name
         self.popularity = popularity
-        self.albums = albums
+        self.album = album
         self.artists = artists
 
 

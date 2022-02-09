@@ -1,6 +1,4 @@
 import typing
-from song import Song
-from artist import Artist
 
 
 class Album:
