@@ -7,5 +7,5 @@ class User:
     name: str
     password: str
     is_premium: bool
-    playlists: typing.Dict[str, Playlist]
+    playlists: typing.Dict[str, str]  # playlist name to playlist id
 
