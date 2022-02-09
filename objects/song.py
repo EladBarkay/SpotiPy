@@ -1,6 +1,6 @@
 import typing
 import json
-import objects.consts.general as consts
+import consts.general as consts
 
 
 def load(song_path):

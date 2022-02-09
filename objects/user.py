@@ -1,7 +1,7 @@
-import objects.consts.general as consts
-import objects.consts.custom_exceptions as ex
-from objects.file_managment import save_and_load as manager
-import typing
+import consts.general as consts
+import consts.custom_exceptions as ex
+from file_managment import save_and_load as manager
+import typing 
 
 
 class User:
