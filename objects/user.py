@@ -1,6 +1,7 @@
 import typing
 import consts.general as consts
 import consts.custom_exceptions as ex
+import search
 from objects.playlist import Playlist
 from file_managment import save_and_load as manager
 from spotipy_generic_obj import SpotipyGenericObj
@@ -39,3 +40,10 @@ class User(SpotipyGenericObj):
             raise ex.InvalidFreeUserOperation(
                 f"Free user cant have more than {consts.FREE_ACCOUNT_MAX_SONGS_IN_PLAYLIST_COUNT} songs "
                 f"in one playlist")
+
+    def search(self, searcher: search.Searcher, search_type, **search_params):
+        results = searcher.get(search_type, **search_params)
+        if not self.is_premium:
+            return results[:consts.FREE_ACCOUNT_MAX_RESULTS_FROM_SEARCH]
+        return results
+    
