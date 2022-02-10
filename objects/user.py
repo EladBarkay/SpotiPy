@@ -40,10 +40,10 @@ class User(SpotipyGenericObj):
             raise ex.InvalidFreeUserOperation(
                 f"Free user cant have more than {consts.FREE_ACCOUNT_MAX_SONGS_IN_PLAYLIST_COUNT} songs "
                 f"in one playlist")
+        self.playlists[p_index].add_song(song_id)
 
     def search(self, searcher: search.Searcher, search_type, **search_params):
         results = searcher.get(search_type, **search_params)
         if not self.is_premium:
             return results[:consts.FREE_ACCOUNT_MAX_RESULTS_FROM_SEARCH]
         return results
-    
