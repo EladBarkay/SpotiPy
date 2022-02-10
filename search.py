@@ -17,7 +17,7 @@ def logged(func):
         logger.debug(f"started {func.__name__} at {datetime.datetime.now()}")
         try:
             logging.info("started '{0}', parameters : {1} and {2}".
-                         format(func.__name__, *args, **kwargs))
+                         format(func.__name__, args, kwargs))
             return func(*args, **kwargs)
         except Exception as e:
             logging.exception(e)
