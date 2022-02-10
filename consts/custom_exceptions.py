@@ -26,3 +26,8 @@ class PlaylistNotExistsError(Exception):
 class InvalidSearchOption(Exception):
     def __init__(self, msg: str = None):
         super().__init__(msg)
+
+
+class NotAUserException(Exception):
+    def __init__(self, msg: str = None):
+        super().__init__(msg)
