@@ -30,11 +30,7 @@ class Searcher:
         return albums
 
     def all_artist_songs(self, artist_id: str):
-        artist_songs: typing.List[Song.Song] = []
-        for song in self.songs:
-            if artist_id in [artist.id for artist in song.artists]:
-                artist_songs.append(song)
-        return artist_songs
+        return [song for song in self.songs if artist_id in [artist.id for artist in song.artists]]
 
     def artist_top_songs(self, artist_id: str, countToShow=10):
         all_songs = self.all_artist_songs(artist_id)
@@ -42,7 +38,10 @@ class Searcher:
         # git commit -m "func for all songs of an artist, and a func for artist to"
         return all_songs[:countToShow]
 
+    def album_songs(self, album_id):
+        return [song for song in self.songs if song.album.id == album_id]
+
 
 x = Searcher()
-for i in x.artist_top_songs("3MZsBdqDrRTJihTHQrO6Dq"):
+for i in x.artist_top_songs("39jFFncu6W0phhYK16Dp9g"):
     print(i.__dict__)
