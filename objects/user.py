@@ -8,7 +8,10 @@ from objects.spotipy_generic_obj import SpotipyGenericObj
 
 
 def load(user_name: str):
-    return manager.load(object_path(user_name))
+    to_ret = manager.load(object_path(user_name))
+    if not isinstance(to_ret, User):
+        raise ex.NotAUserException()
+    return to_ret
 
 
 def object_path(name):
