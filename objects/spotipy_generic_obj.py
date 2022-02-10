@@ -13,3 +13,6 @@ class SpotipyGenericObj:
         if isinstance(other, SpotipyGenericObj):
             return self.id == other.id and self.name == other.name
         return self == other
+
+    def __repr__(self):
+        return str(self.__dict__)
