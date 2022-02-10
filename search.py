@@ -23,7 +23,7 @@ def logged(func):
             logging.exception(e)
         logger.debug(f"finished {func.__name__} at {datetime.datetime.now()}")
     return wrapper
-
+    
 
 class Searcher:
     songs: typing.List[Song.Song]
