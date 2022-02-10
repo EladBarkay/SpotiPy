@@ -1,15 +1,16 @@
 import typing
 import consts.general as consts
 import consts.custom_exceptions as ex
+from objects.playlist import Playlist
 from file_managment import save_and_load as manager
 from spotipy_generic_obj import SpotipyGenericObj
 
 
 class User(SpotipyGenericObj):
     is_premium: bool
-    playlists: typing.Dict[str, str]  # playlist name to playlist id
+    playlists: typing.List[Playlist]  # playlist id to Playlist
 
-    def __init__(self, _id: str, name: str, is_premium: bool, playlists: typing.Dict[str, str]):
+    def __init__(self, _id: str, name: str, is_premium: bool, playlists: typing.List[Playlist]):
         super().__init__(_id, name)
         self.is_premium = is_premium
         self.playlists = playlists
@@ -20,7 +21,21 @@ class User(SpotipyGenericObj):
     def save(self):
         manager.save(self, self._object_path())
 
-    def add_playlist(self, p_name, p_id):
-        if p_id in self.playlists.keys():
+    def add_playlist(self, playlist: Playlist):
+        if len(self.playlists) >= consts.FREE_ACCOUNT_MAX_PLAYLIST_COUNT and not self.is_premium:
+            raise ex.InvalidFreeUserOperation(
+                f"Free user cant have more than {consts.FREE_ACCOUNT_MAX_PLAYLIST_COUNT} playlists")
+        if playlist.name in [p.name for p in self.playlists]:
             raise ex.PlaylistNameAlreadyExistsError()
-        self.playlists[p_name] = p_id
+        self.playlists.append(playlist)
+
+    def add_song_to_playlist(self, song_id: str, p_name: str):
+        if p_name not in [p.name for p in self.playlists]:
+            raise ex.PlaylistNotExistsError()
+        p_index = [i for i in range(len(self.playlists)) if self.playlists[i].name == p_name][0]
+
+        if len(self.playlists[p_index].songs) >= consts.FREE_ACCOUNT_MAX_SONGS_IN_PLAYLIST_COUNT \
+                and not self.is_premium:
+            raise ex.InvalidFreeUserOperation(
+                f"Free user cant have more than {consts.FREE_ACCOUNT_MAX_SONGS_IN_PLAYLIST_COUNT} songs "
+                f"in one playlist")
