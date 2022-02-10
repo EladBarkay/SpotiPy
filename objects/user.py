@@ -7,6 +7,15 @@ from file_managment import save_and_load as manager
 from objects.spotipy_generic_obj import SpotipyGenericObj
 
 
+def load(user_name: str):
+    return manager.load(object_path(user_name))
+
+
+def object_path(name):
+    return f'{consts.FILES_ROOT_PATH}\\{consts.USERS}\\' \
+           f'{consts.USER_FILE_START}{name}{consts.PICKLE_FILE_TYPE}'
+
+
 class User(SpotipyGenericObj):
     is_premium: bool
     playlists: typing.List[Playlist]  # playlist id to Playlist
@@ -16,12 +25,8 @@ class User(SpotipyGenericObj):
         self.is_premium = is_premium
         self.playlists = playlists if playlists is not None else []
 
-    def _object_path(self):
-        return f'{consts.FILES_ROOT_PATH}\\{consts.USERS}\\' \
-               f'{consts.USER_FILE_START}{self.name}{consts.PICKLE_FILE_TYPE}'
-
     def save(self):
-        manager.save(self, self._object_path())
+        manager.save(self, object_path(self.name))
 
     def add_playlist(self, playlist: Playlist):
         if len(self.playlists) >= consts.FREE_ACCOUNT_MAX_PLAYLIST_COUNT and not self.is_premium:
